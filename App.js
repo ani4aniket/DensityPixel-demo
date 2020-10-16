@@ -8,18 +8,15 @@ import {
 } from './Responsive';
 
 class App extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this._isMounted = true;
     listenToOrientationChanges(this);
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
     removeOrientationChanges();
   }
 
@@ -29,14 +26,9 @@ class App extends Component {
     return (
       <>
         <StatusBar barStyle="dark-content" />
-        <SafeAreaView
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <SafeAreaView style={ps.container}>
           <View style={getDynamicStyles(ps.view, ls.view)}>
-            <Text style={getDynamicStyles(ps.text, ls.text)}>Hello, world</Text>
+            <Text style={ps.text}>Hello, world</Text>
           </View>
         </SafeAreaView>
       </>
@@ -46,11 +38,16 @@ class App extends Component {
 
 const portraitStyles = () => {
   return StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     view: {
       backgroundColor: 'lightblue',
     },
     text: {
-      fontSize: widthToDp('6%'),
+      fontSize: widthToDp('4%'),
     },
   });
 };
@@ -60,9 +57,9 @@ const landscapeStyles = () => {
     view: {
       backgroundColor: 'red',
     },
-    text: {
-      fontSize: widthToDp('3%'),
-    },
+    // text: {
+    //   fontSize: widthToDp('3%'),
+    // },
   });
 };
 

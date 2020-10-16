@@ -16,9 +16,10 @@ const listenToOrientationChanges = (ref) => {
   Dimensions.addEventListener('change', (newDimension) => {
     width = newDimension.screen.width;
     height = newDimension.screen.height;
-    ref.setState({
-      orientation: height > width ? 'portrait' : 'landscape',
-    });
+    height > width ? ref('portrait') : ref('landscape');
+    // ref.setState({
+    //   orientation: height > width ? 'portrait' : 'landscape',
+    // });
   });
 };
 
